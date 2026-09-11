@@ -1,10 +1,10 @@
 @import url('./styles-base.css');
 
 /* MÔ brand lockup */
-.brand{align-items:center!important;gap:9px!important}
-.brand::before{content:"";display:block;width:58px;height:48px;flex:0 0 58px;background:url('logo.png') center/contain no-repeat}
-.brand-main{font-size:25px!important;line-height:1!important;letter-spacing:.06em!important}
-.brand-sub{font-size:9px!important;letter-spacing:.18em!important;margin:0!important;align-self:center!important}
+.brand{align-items:center!important;gap:12px!important}
+.brand::before{content:"";display:block;width:66px;height:54px;flex:0 0 66px;background:url('logo.png') left center/contain no-repeat}
+.brand-main,.brand-sub{display:none!important}
+.brand::after{content:"ga gối cho riêng bạn";font:italic 500 17px/1.1 "Cormorant Garamond",serif;color:#5c554d;white-space:nowrap;letter-spacing:.01em}
 .footer-brand{position:relative;padding-top:118px}
-.footer-brand::before{content:"";position:absolute;left:0;top:0;width:126px;height:102px;background:url('logo.png') center/contain no-repeat}
-@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:43px;height:36px;flex-basis:43px}.brand-main{font-size:21px!important}.brand-sub{font-size:7px!important;letter-spacing:.13em!important}.footer-brand{padding-top:94px}.footer-brand::before{width:102px;height:82px}}
+.footer-brand::before{content:"";position:absolute;left:0;top:0;width:126px;height:102px;background:url('logo.png') left center/contain no-repeat}
+@media(max-width:620px){.brand{gap:7px!important}.brand::before{width:48px;height:39px;flex-basis:48px}.brand::after{font-size:13px}.footer-brand{padding-top:94px}.footer-brand::before{width:102px;height:82px}}
