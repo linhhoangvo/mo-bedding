@@ -48,7 +48,26 @@
 .product-info p{line-height:1.45;color:#656960}
 .journal article>p{font-size:12px;color:#676b63;margin:0 0 12px;max-width:90%}
 
+/* Full list of Mô Bedding stories */
+.journal.story-list-section{background:#f3f0e8!important}
+.story-list-intro{max-width:760px;margin-bottom:42px}
+.story-list-intro h2{font:500 clamp(42px,4.3vw,66px)/.98 "Cormorant Garamond",serif;margin:0 0 12px;letter-spacing:-.02em}
+.story-list-intro p{margin:0;color:#666b63;font-size:13px}
+.story-list-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 24px}
+.story-list-card{min-width:0}
+.story-list-image{aspect-ratio:1.25;overflow:hidden;background:#ded8ce;margin-bottom:15px}
+.story-list-image img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.story-list-card:hover .story-list-image img{transform:scale(1.025)}
+.story-list-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.story-list-status{font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.story-list-number{font:400 17px "Cormorant Garamond",serif;color:#7a7d76}
+.story-list-card h3{font:500 27px/1.06 "Cormorant Garamond",serif;margin:0 0 9px}
+.story-list-card p{font-size:11px;line-height:1.55;color:#686c65;margin:0;max-width:94%}
+.story-list-card.is-draft{opacity:.68}
+.story-list-card.is-draft .story-list-image{filter:saturate(.72)}
+
 .footer-brand{position:relative;padding-top:132px}
 .footer-brand::before{content:"";position:absolute;left:0;top:0;width:132px;height:122px;background:url('logo.webp') center/contain no-repeat}
-@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:42px;height:40px;flex-basis:42px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}.mobile-menu a{font-size:31px!important}.hero-progress{left:5vw;bottom:20px}.hero-progress button{width:24px}.hero-progress button.active{width:36px}.reviews{padding:64px 7vw!important}.reviews blockquote{font-size:clamp(25px,7.4vw,33px)!important;padding:0 2vw}.reviews blockquote span{margin-top:18px!important}.review-dots{margin-top:16px!important}}
+@media(max-width:960px){.story-list-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:42px;height:40px;flex-basis:42px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}.mobile-menu a{font-size:31px!important}.hero-progress{left:5vw;bottom:20px}.hero-progress button{width:24px}.hero-progress button.active{width:36px}.reviews{padding:64px 7vw!important}.reviews blockquote{font-size:clamp(25px,7.4vw,33px)!important;padding:0 2vw}.reviews blockquote span{margin-top:18px!important}.review-dots{margin-top:16px!important}.story-list-grid{grid-template-columns:1fr;gap:34px}.story-list-intro{margin-bottom:30px}.story-list-intro h2{font-size:42px}.story-list-card h3{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:opacity .35s ease;transform:none!important}.hero-slide.active{transform:none!important}}
