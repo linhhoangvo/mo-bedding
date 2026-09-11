@@ -108,3 +108,64 @@ if(heroEl){
   heroDots.forEach((dot,i)=>dot.addEventListener('click',()=>showHero(i)));
   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval(()=>showHero(heroIndex+1),4800);}
 }
+
+/* Mô Bedding — full story catalogue kept inside this site */
+const moStories=[
+  {status:'Chuyện',title:'Ngày mới vui',desc:'Được thức giấc cùng tia nắng xiên xiên qua khe cửa sổ thật là tuyệt. Nếu đủ may mắn ta sẽ cảm nhận được…',img:'corner.jpg'},
+  {status:'Nháp',title:'Nhiều năng lượng',desc:'Dậy sớm chuẩn bị cho một chuyến đi.',img:'window.jpg'},
+  {status:'Chuyện',title:'Nhớ về tuổi thơ',desc:'Thuở bé ở khu tập thể hay nghe đủ thứ tiếng rao của những người bán rong. Không hiểu sao tiếng rao của một…',img:'linen.jpg'},
+  {status:'Nháp',title:'Cái đệm mới',desc:'Dắt tấm trải quanh cái đệm rất dày và nhớ lần đầu được nằm đệm.',img:'rumple.jpg'},
+  {status:'Chuyện',title:'Vitamin B1',desc:'Có cái gì cộm cộm dưới chăn. Ơ, không biết ai để lọ vitamin B1 trên giường vậy nhỉ? Viên B1 và câu chuyện…',img:'pillows.jpg'},
+  {status:'Nháp',title:'Phong thuỷ',desc:'Tỉnh dậy sau giấc ngủ ngon, chồng kể chuyện nhắc đến từ phong thuỷ.',img:'green.jpg'},
+  {status:'Nháp',title:'Màu ngày mưa',desc:'Trời mưa, có chút buồn nhẹ nhẹ.',img:'green.jpg'},
+  {status:'Nháp',title:'Lucky underwear',desc:'Nhận được điện thoại của Steve, nhớ câu chuyện Patty nói về “a lucky under wear của Steve”.',img:'pillows.jpg'},
+  {status:'Nháp',title:'Dặn con trai',desc:'Ngang qua con phố cũ có nhà anh họ, nhớ lần đi qua phòng cô cháu gái.',img:'corner.jpg'},
+  {status:'Chuyện',title:'Thương bạn',desc:'Đi công tác Sài gòn, về nhà cô bạn thân ngủ mấy đêm. Dậy thì bạn đã đi làm từ sớm, ghé ngang phòng bạn,…',img:'window.jpg'},
+  {status:'Nháp',title:'Lây cảm hứng cho bạn',desc:'Bạn không biết cách làm giường.',img:'linen.jpg'},
+  {status:'Chuyện',title:'Making bed',desc:'Không biết nên gọi “making bed” bằng tiếng Việt là gì cho đúng. Dọn giường? Xếp chăn? Trải lại ga? Chưa từ…',img:'rumple.jpg'},
+  {status:'Nháp',title:'Tò mò',desc:'Hỏi bạn về việc làm giường buổi sáng (phỏng vấn bạn bè).',img:'pillows.jpg'},
+  {status:'Nháp',title:'Cô đơn',desc:'Ở nhà một mình.',img:'green.jpg'},
+  {status:'Nháp',title:'Công chúa và hạt đậu',desc:'Câu chuyện này Mô đang viết.',img:'green.jpg'},
+  {status:'Nháp',title:'Em Híp',desc:'Câu chuyện này Mô đang viết.',img:'pillows.jpg'},
+  {status:'Nháp',title:'Chăn đệm đắt tiền',desc:'Đến thăm nhà người nổi tiếng.',img:'corner.jpg'},
+  {status:'Chuyện',title:'Gối thêu tay',desc:'Nghỉ đêm ở Camfusion, một căn phòng airBNB xinh xắn, được chăm sóc rất kỹ lưỡng và thứ khiến mình nhớ lâu…',img:'window.jpg'},
+  {status:'Nháp',title:'Chăn đệm khách sạn 5 sao',desc:'Ở phòng khách sạn 5 sao.',img:'linen.jpg'},
+  {status:'Nháp',title:'Mất ngủ',desc:'Một đêm mất ngủ.',img:'rumple.jpg'},
+  {status:'Nháp',title:'“Người tình” forever',desc:'Câu chuyện này Mô đang viết.',img:'pillows.jpg'},
+  {status:'Nháp',title:'Màn chống muỗi',desc:'Ngủ nhà bạn có muỗi.',img:'green.jpg'},
+  {status:'Nháp',title:'Ngủ với áo của mẹ',desc:'Chuyện em bé ôm áo mẹ đi ngủ.',img:'green.jpg'},
+  {status:'Chuyện',title:'Feeling sexy',desc:'Vô tình nghe một đoạn clip nói về chuyện chăn gối, đoạn clip nhẹ nhàng nhắc đến cảm giác được chạm, được…',img:'pillows.jpg'},
+  {status:'Nháp',title:'Hài lòng với bản thân',desc:'Nhận xét của bác Phương về giường của con trai.',img:'corner.jpg'},
+  {status:'Nháp',title:'Một ngày người không khoẻ',desc:'Ngủ dậy với cảm giác uể oải.',img:'window.jpg'},
+  {status:'Nháp',title:'“Nhà gọn thích nhỉ”',desc:'Tâm sự của một người bạn trai.',img:'linen.jpg'}
+];
+
+const journalSection=document.querySelector('.journal');
+if(journalSection){
+  journalSection.id='story-list';
+  journalSection.classList.add('story-list-section');
+  journalSection.innerHTML=`
+    <div class="story-list-intro">
+      <p class="eyebrow">MÔ BEDDING KỂ CHUYỆN</p>
+      <h2>Danh sách chuyện</h2>
+      <p>27 câu chuyện giường.</p>
+    </div>
+    <div class="story-list-grid">
+      ${moStories.map((story,i)=>`
+        <article class="story-list-card ${story.status==='Nháp'?'is-draft':''}">
+          <div class="story-list-image"><img src="${story.img}" alt="${story.title}" loading="lazy" decoding="async"></div>
+          <div class="story-list-meta"><span class="story-list-status">${story.status}</span><span class="story-list-number">${String(i+1).padStart(2,'0')}</span></div>
+          <h3>${story.title}</h3>
+          <p>${story.desc}</p>
+        </article>`).join('')}
+    </div>`;
+}
+
+const storyLeadLink=document.querySelector('.story-copy .line-link');
+if(storyLeadLink){
+  storyLeadLink.href='#story-list';
+  storyLeadLink.removeAttribute('target');
+  storyLeadLink.removeAttribute('rel');
+  storyLeadLink.removeAttribute('data-i18n');
+  storyLeadLink.textContent='Xem danh sách chuyện →';
+}
