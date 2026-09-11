@@ -13,9 +13,9 @@ const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.
 $$('.reveal').forEach(el=>revealObserver.observe(el));
 
 let slide=0; const blocks=$$('.reviews blockquote'); const dots=$$('.review-dots button');
-function showReview(n){slide=n;blocks.forEach(b=>b.style.transform=`translateX(-${n*100}%)`);dots.forEach((d,i)=>d.classList.toggle('active',i===n))}
+function showReview(n){if(!blocks.length)return;slide=n;blocks.forEach(b=>b.style.transform=`translateX(-${n*100}%)`);dots.forEach((d,i)=>d.classList.toggle('active',i===n))}
 dots.forEach(d=>d.addEventListener('click',()=>showReview(+d.dataset.slide)));
-setInterval(()=>showReview((slide+1)%blocks.length),5500);
+if(blocks.length)setInterval(()=>showReview((slide+1)%blocks.length),5500);
 
 let cart=[]; const fmt=n=>new Intl.NumberFormat('vi-VN').format(n)+'₫';
 function renderCart(){
@@ -26,36 +26,51 @@ function renderCart(){
   $('#cartTotal').textContent=fmt(cart.reduce((s,x)=>s+x.price,0));
   $$('[data-rm]').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.rm,1);renderCart()});
 }
-$$('.quick-add').forEach(btn=>btn.addEventListener('click',e=>{const card=e.currentTarget.closest('.product-card');cart.push({name:card.dataset.name,price:+card.dataset.price});renderCart();cartDrawer.classList.add('open')}));
-$('.add-bundle')?.addEventListener('click',()=>{cart.push({name:'Complete Your Bed Bundle',price:4390000});renderCart();cartDrawer.classList.add('open')});
+$$('.quick-add').forEach(btn=>btn.addEventListener('click',e=>{
+  const card=e.currentTarget.closest('.product-card');
+  if(card.dataset.link){window.open(card.dataset.link,'_blank','noopener');return;}
+  cart.push({name:card.dataset.name,price:+card.dataset.price});renderCart();cartDrawer.classList.add('open');
+}));
+$('.add-bundle')?.addEventListener('click',e=>{const link=e.currentTarget.dataset.link;if(link)window.open(link,'_blank','noopener')});
 
 const translations={
-  navNew:['Bộ sưu tập mới','New Collection'],navShop:['Sản phẩm','Shop'],navStory:['Chuyện của Mô','Our Story'],navJournal:['Bedding Story','Bedding Story'],navContact:['Liên hệ','Contact'],
-  heroTitle:['Ngủ mềm hơn.<br>Sống chậm hơn.','Sleep softer.<br>Live slower.'],heroText:['Bộ chăn ga từ lụa tre dành cho những căn phòng muốn giữ lại chút dịu dàng.','Bamboo bedding for rooms that want to hold on to a little softness.'],heroCta:['Khám phá bộ sưu tập','Explore the collection'],
-  introEyebrow:['BỘ SƯU TẬP MỚI · 2026','NEW COLLECTION · 2026'],introTitle:['A bed should feel like coming home.','A bed should feel like coming home.'],introText:['Mô tạo nên những lớp vải chạm nhẹ vào da, phối màu như một căn phòng có nắng và để từng chiếc giường mang một tính cách riêng.','Mô creates soft layers, sun-washed colours and bedding with a personality of its own.'],
-  shopEyebrow:['CHỌN THEO CẢM GIÁC','SHOP BY MOOD'],shopTitle:['Tìm thứ hợp với chiếc giường của bạn','Find what belongs on your bed'],viewAll:['Xem tất cả →','View all →'],
-  storyEyebrow:['CHUYỆN CỦA MÔ','OUR STORY'],storyTitle:['Không chỉ là ga giường. Là cách căn phòng khiến bạn muốn ở lại.','Not just bedding. A reason to stay a little longer.'],storyText:['Mô bắt đầu từ một câu hỏi rất nhỏ: điều gì khiến ta thật sự muốn trở về chiếc giường của mình? Câu trả lời không nằm ở sự cầu kỳ, mà ở chất liệu dịu, màu sắc có cảm xúc và những chi tiết vừa đủ.','Mô began with a small question: what makes us truly want to return to our own bed? We found the answer in gentle materials, emotional colour and details that never try too hard.'],readStory:['Đọc câu chuyện của Mô →','Read our story →'],
-  b1t:['Mềm & mát','Soft & cool'],b1d:['Êm trên da, thoáng trong khí hậu nhiệt đới.','Gentle on skin, breathable in tropical weather.'],b2t:['Lụa tre','Bamboo silk'],b2d:['Bề mặt mịn, rủ đẹp và có cảm giác tự nhiên.','Smooth, fluid and naturally tactile.'],b3t:['Dùng lâu','Made to last'],b3d:['Thiết kế để yêu lâu hơn một mùa.','Designed to be loved beyond one season.'],b4t:['Phối có gu','Easy to layer'],b4d:['Bảng màu để bạn mix, không cần mua nguyên set.','A palette made to mix, not match.'],
-  bestTitle:['Những món được yêu nhiều nhất','Most-loved pieces'],shopAll:['Xem tất cả →','Shop all →'],lifeTitle:['Chậm thêm năm phút cũng được.','Five more minutes is allowed.'],lifeText:['Ánh nắng, một chiếc giường chưa vội gấp và buổi sáng không cần bắt đầu quá nhanh.','Sunlight, an unmade bed, and a morning that does not need to start too quickly.'],
-  matTitle:['Lụa tre — vì giấc ngủ cũng cần thở.','Bamboo silk — because sleep needs to breathe.'],matText:['Mô chọn lụa tre vì cảm giác mát, mềm, rủ và phù hợp với những đêm nóng ẩm. Quan trọng hơn, nó tạo nên một bề mặt rất “Mô”: dịu mắt và dịu da.','We choose bamboo silk for its cool touch, soft drape and comfort in warm, humid nights. Most of all, it feels unmistakably Mô: gentle to the eye and to the skin.'],learnMore:['Tìm hiểu về chất liệu →','Learn about our material →'],
-  bundleTitle:['Một chiếc giường, nhiều lớp cảm xúc.','One bed, many layers of feeling.'],bundleSet:['Trọn bộ','Complete set'],bundleCta:['Thêm cả set vào bag','Add the look to bag'],
-  susTitle:['Đẹp vừa đủ. Có trách nhiệm vừa thật.','Beautiful enough. Responsible for real.'],susText:['Mô ưu tiên chất liệu có vòng đời dài, đóng gói tối giản và sản xuất theo nhịp vừa phải. Không nói quá lớn về “xanh” — chỉ cố gắng làm từng lựa chọn tốt hơn.','We favour longer-lasting materials, restrained packaging and a slower production rhythm. We do not shout about being green — we simply try to make better choices, one by one.'],
-  communityTitle:['Mô trong những căn phòng thật','Mô in real rooms'],journalTitle:['Đọc trước khi ngủ','Stories for before sleep'],allStories:['Xem tất cả story →','See all stories →'],j1:['Giặt lụa tre thế nào để càng dùng càng mềm?','How to wash bamboo bedding so it gets softer with time'],j2:['Phòng ngủ mùa nóng: ít đồ hơn, ngủ sâu hơn.','Warm-weather bedrooms: less clutter, deeper sleep'],j3:['Cách phối một chiếc giường không cần “đồng bộ”.','How to style a bed without matching everything'],footerTag:['Cho những chiếc giường bạn luôn muốn quay về.','For beds you want to come back to.'],newsTitle:['Thi thoảng Mô gửi một lá thư dễ ngủ.','Occasionally, Mô sends a letter for slower nights.']
+  navNew:['Nghệ thuật làm giường','The Art of Making a Bed'],navShop:['Lựa chọn của bạn','Your Selection'],navStory:['Mô bedding kể chuyện','Mô Bedding Stories'],navJournal:['Phối giường','Style Your Bed'],navContact:['Liên hệ','Contact'],
+  heroTitle:['Ru Tình','Ru Tình'],heroText:['ga gối cho riêng bạn','bedding made just for you'],heroCta:['Nghệ thuật làm giường','The Art of Making a Bed'],
+  introEyebrow:['NGHỆ THUẬT LÀM GIƯỜNG','THE ART OF MAKING A BED'],introTitle:['Style bận rộn — 1 phút làm giường','Busy style — make the bed in one minute'],introText:['Ga sát nệm, gối xếp gọn. Một phút, xong.','Fitted sheet in place, pillows neatly stacked. One minute, done.'],
+  shopEyebrow:['NGHỆ THUẬT LÀM GIƯỜNG','THE ART OF MAKING A BED'],shopTitle:['Mỗi chiếc giường có một nhịp riêng.','Every bed has its own rhythm.'],viewAll:['Xem thêm →','See more →'],
+  storyEyebrow:['MÔ BEDDING KỂ CHUYỆN','MÔ BEDDING STORIES'],storyTitle:['Ngày mới vui','A Happy New Day'],storyText:['Được thức giấc cùng tia nắng xiên xiên qua khe cửa sổ thật là tuyệt. Nếu đủ may mắn ta sẽ cảm nhận được niềm vui, sự đủ đầy mà một tia nắng có thể mang đến. Giờ là năm phút cho “người tình” ga gối.','Waking to a slant of sunlight through the window is wonderful. If we are lucky enough, a ray of sun can bring a sense of joy and fullness. Now, five minutes for our bedding “lover”.'],readStory:['Nghe chuyện →','Read the story →'],
+  b1t:['1 phút làm giường','A one-minute bed'],b1d:['Ga sát nệm, gối xếp gọn. Một phút, xong.','Fitted sheet in place, pillows neatly stacked. One minute, done.'],b2t:['Whatever it takes','Whatever it takes'],b2d:['Linen để nhăn, throw phủ lệch. Không vội.','Let linen wrinkle, let the throw fall off-centre. No rush.'],b3t:['Style cool','Cool style'],b3d:['Gối thêu đặt lệch nhịp. Giường như một tấm ảnh.','An embroidered pillow sits slightly off-beat. The bed becomes a picture.'],b4t:['Câu chuyện giường','Bed stories'],b4d:['Mô bedding kể chuyện — 27 câu chuyện và còn tiếp.','Mô Bedding Stories — 27 stories and counting.'],
+  productEyebrow:['LỰA CHỌN CỦA BẠN','YOUR SELECTION'],bestTitle:['Những món cho chiếc giường của bạn','Pieces for your bed'],shopAll:['Xem thêm →','See more →'],
+  lifeTitle:['Nhớ về tuổi thơ','Remembering Childhood'],lifeText:['Thuở bé ở khu tập thể hay nghe đủ thứ tiếng rao của những người bán rong. Tiếng rao người bán chiếu kéo theo mùi chiếu cói thơm mộc mạc và cả một thời nhà không có điều hòa, không có đệm.','As a child in the old collective housing blocks, street vendors called out all day. The mat seller’s voice brings back the scent of woven rush mats and a time before air-conditioning and mattresses.'],
+  materialEyebrow:['NGHỆ THUẬT LÀM GIƯỜNG','THE ART OF MAKING A BED'],matTitle:['Making bed','Making bed'],matText:['Không biết nên gọi “making bed” bằng tiếng Việt là gì cho đúng. Dọn giường? Xếp chăn? Trải lại ga? Chưa từ nào thật sự vừa ý — nhưng cảm giác dành vài phút làm chiếc giường đẹp lên thì rất Mô.','What is the right Vietnamese phrase for “making bed”? Tidying the bed? Folding the duvet? Straightening the sheet? No phrase feels quite right — but spending a few minutes making the bed beautiful feels very Mô.'],learnMore:['Xem nghệ thuật làm giường →','Explore the art of making a bed →'],
+  experienceEyebrow:['ĐẶT TRẢI NGHIỆM','BOOK AN EXPERIENCE'],bundleTitle:['Ngủ thử Mô Bedding tại khách sạn','Try Mô Bedding at a hotel'],bundleSet:['Đặt trải nghiệm','Experience'],bundleCta:['Đặt trải nghiệm','Book the experience'],
+  susTitle:['27 câu chuyện giường.','27 bed stories.'],susText:['Ngày mới vui. Nhớ về tuổi thơ. Vitamin B1. Thương bạn. Making bed. Gối thêu tay. Feeling sexy… Mô giữ lại những chuyện nhỏ bắt đầu từ chiếc giường.','A Happy New Day. Remembering Childhood. Vitamin B1. Caring for a Friend. Making bed. Hand-embroidered pillows. Feeling sexy… Mô keeps the little stories that begin around a bed.'],storyListLink:['Xem danh sách chuyện →','See all stories →'],
+  communityTitle:['Theo dõi Mô trên Instagram','Follow Mô on Instagram'],journalTitle:['Đọc một chuyện trước khi ngủ','A story before sleep'],allStories:['Xem tất cả 27 chuyện →','See all 27 stories →'],j1:['Ngày mới vui','A Happy New Day'],j2:['Vitamin B1','Vitamin B1'],j3:['Feeling sexy','Feeling sexy'],footerTag:['ga gối cho riêng bạn','bedding made just for you'],newsTitle:['Có một câu chuyện muốn kể với Mô?','Have a story to tell Mô?']
 };
 let lang='vi';
 $('#langBtn')?.addEventListener('click',()=>{lang=lang==='vi'?'en':'vi';document.documentElement.lang=lang;$('#langBtn').textContent=lang==='vi'?'EN':'VI';$$('[data-i18n]').forEach(el=>{const t=translations[el.dataset.i18n];if(t)el.innerHTML=t[lang==='vi'?0:1]})});
 
-$('#searchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.trim();if(q) alert(`Demo search: “${q}”`);}});
+$('#searchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.trim();if(q) alert(`Tìm trong Mô: “${q}”`);}});
+
+$('#contactForm')?.addEventListener('submit',e=>{
+  e.preventDefault();
+  const email=$('#contactEmail')?.value.trim()||'';
+  const subject=encodeURIComponent('Hello Mô Bedding');
+  const body=encodeURIComponent(`Email của tôi: ${email}\n\nMình muốn liên hệ với Mô.`);
+  window.location.href=`mailto:modiphe.bedding@gmail.com?subject=${subject}&body=${body}`;
+});
+
 renderCart();
 
 /* Hero photo-film: multiple stills with crossfade + slow camera movement */
 const heroEl=document.querySelector('.hero');
 if(heroEl){
   const heroFrames=[
-    ['hero-photo.jpg','Mô bedding in soft natural light','50% 52%'],
-    ['corner.jpg','A quiet bedroom corner','50% 54%'],
-    ['linen.jpg','Soft layered bedding','50% 48%'],
+    ['hero-photo.jpg','Mô Bedding — Ru Tình','50% 52%'],
+    ['linen.jpg','Mô Bedding linen mood','50% 50%'],
+    ['pillows.jpg','Mô Bedding pillows','50% 50%'],
     ['window.jpg','Morning light by the bed','50% 50%'],
+    ['corner.jpg','A quiet bedroom corner','50% 54%'],
     ['rumple.jpg','Relaxed bedding texture','50% 55%']
   ];
   const originalHero=heroEl.querySelector('.hero-image');
@@ -91,7 +106,5 @@ if(heroEl){
     heroDots.forEach((dot,i)=>dot.classList.toggle('active',i===heroIndex));
   };
   heroDots.forEach((dot,i)=>dot.addEventListener('click',()=>showHero(i)));
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(()=>showHero(heroIndex+1),4800);
-  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval(()=>showHero(heroIndex+1),4800);}
 }
