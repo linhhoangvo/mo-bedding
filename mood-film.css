@@ -1,0 +1,115 @@
+/* Real Mô mood film — replaces the old photo-sequence block */
+.collections::after,
+.collections .collection-grid::before,
+.collections .collection-grid::after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Keep homepage order intentional */
+main>.hero{order:0!important}
+main>.collections{order:1!important}
+main>.mood-film{order:2!important}
+main>.products{order:3!important}
+main>.material{order:4!important}
+main>.story-split{order:5!important}
+main>.lifestyle{order:6!important}
+main>.reviews{order:7!important}
+main>.bundle{order:8!important}
+main>.community{order:9!important}
+main>.journal{order:10!important}
+
+.mood-film{
+  position:relative;
+  width:100%;
+  height:clamp(520px,62vw,760px);
+  overflow:hidden;
+  background:#171a16;
+  isolation:isolate;
+}
+
+.mood-film-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  z-index:0;
+}
+
+.mood-film::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(13,15,13,.48) 0%,rgba(13,15,13,.18) 43%,rgba(13,15,13,.08) 72%,rgba(13,15,13,.12) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.04) 45%,rgba(0,0,0,.24) 100%);
+}
+
+.mood-film-copy{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  padding:0 5vw 68px;
+  color:#fff;
+  pointer-events:none;
+}
+
+.mood-film-copy h2{
+  margin:0 0 14px;
+  max-width:720px;
+  color:#fff;
+  font:500 clamp(38px,4vw,58px)/.98 "Cormorant Garamond",serif;
+  letter-spacing:-.02em;
+  text-shadow:0 2px 18px rgba(0,0,0,.28);
+}
+
+.mood-film-copy a{
+  pointer-events:auto;
+  color:rgba(255,255,255,.92);
+  text-decoration:none;
+  font:500 11px/1.4 Manrope,sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding-bottom:5px;
+  border-bottom:1px solid rgba(255,255,255,.45);
+  transition:border-color .25s ease,opacity .25s ease;
+}
+
+.mood-film-copy a:hover{
+  opacity:.82;
+  border-color:#fff;
+}
+
+html[lang="en"] .mood-film-copy h2 .vi,
+html[lang="en"] .mood-film-copy a .vi{display:none}
+html:not([lang="en"]) .mood-film-copy h2 .en,
+html:not([lang="en"]) .mood-film-copy a .en{display:none}
+
+@media(max-width:960px){
+  .mood-film{height:600px}
+  .mood-film-copy{padding:0 6vw 54px}
+  .mood-film-copy h2{font-size:46px;max-width:620px}
+}
+
+@media(max-width:620px){
+  .mood-film{height:58vh;min-height:440px}
+  .mood-film-video{object-position:center center}
+  .mood-film::after{
+    background:linear-gradient(180deg,rgba(13,15,13,.06) 30%,rgba(13,15,13,.56) 100%);
+  }
+  .mood-film-copy{padding:0 7vw 38px}
+  .mood-film-copy h2{font-size:38px;max-width:88vw;margin-bottom:12px}
+  .mood-film-copy a{font-size:9px;line-height:1.5}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mood-film-video{animation:none}
+}
