@@ -12,6 +12,15 @@
 .header-actions .text-btn,.header-actions .cart-btn{font-family:"Cormorant Garamond",serif!important;font-size:17px!important;font-weight:500!important;letter-spacing:.025em!important;text-transform:none!important}
 .mobile-menu a{font-family:"Cormorant Garamond",serif!important;text-transform:none!important;font-weight:500!important;letter-spacing:.02em!important}
 
+/* Cinematic hero — photo sequence that feels like a short film */
+.hero-slides{position:absolute;inset:0;overflow:hidden;background:#d8d3ca}
+.hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.025);transition:opacity 1.45s ease,transform 5.4s cubic-bezier(.2,.55,.3,1);will-change:opacity,transform}
+.hero-slide.active{opacity:1;transform:scale(1.085)}
+.hero-progress{position:absolute;z-index:4;left:6vw;bottom:28px;display:flex;gap:7px;align-items:center}
+.hero-progress button{display:block;width:38px;height:2px;padding:0;border:0;background:rgba(255,255,255,.38);cursor:pointer;transition:background .35s ease,width .35s ease}
+.hero-progress button.active{width:54px;background:#fff}
+
 .footer-brand{position:relative;padding-top:132px}
 .footer-brand::before{content:"";position:absolute;left:0;top:0;width:132px;height:122px;background:url('logo.webp') center/contain no-repeat}
-@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:42px;height:40px;flex-basis:42px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}.mobile-menu a{font-size:31px!important}}
+@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:42px;height:40px;flex-basis:42px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}.mobile-menu a{font-size:31px!important}.hero-progress{left:5vw;bottom:20px}.hero-progress button{width:24px}.hero-progress button.active{width:36px}}
+@media(prefers-reduced-motion:reduce){.hero-slide{transition:opacity .35s ease;transform:none!important}.hero-slide.active{transform:none!important}}
