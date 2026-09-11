@@ -31,10 +31,12 @@ main>.journal{order:10!important}
 .mood-film-video{
   position:absolute;
   inset:0;
+  display:block;
   width:100%;
   height:100%;
   object-fit:cover;
   object-position:center center;
+  background:#171a16;
   z-index:0;
 }
 
