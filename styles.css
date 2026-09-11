@@ -57,6 +57,19 @@ html[lang="en"] .mobile-menu a:nth-of-type(3)::before{content:"Mô Bedding Stori
 /* Remove hero CTA button */
 .hero-copy .btn{display:none!important}
 
+/* Homepage flow: Lựa chọn của bạn before Nghệ thuật làm giường */
+main{display:flex;flex-direction:column}
+main>.hero{order:0}
+main>.products{order:1}
+main>.collections{order:2}
+main>.story-split{order:3}
+main>.lifestyle{order:4}
+main>.material{order:5}
+main>.reviews{order:6}
+main>.bundle{order:7}
+main>.community{order:8}
+main>.journal{order:9}
+
 /* Keep key section titles elegant and on one line on desktop */
 @media(min-width:961px){
   .products .section-heading>div,
