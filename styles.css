@@ -12,6 +12,14 @@
 .header-actions .text-btn,.header-actions .cart-btn{font-family:"Cormorant Garamond",serif!important;font-size:17px!important;font-weight:500!important;letter-spacing:.025em!important;text-transform:none!important}
 .mobile-menu a{font-family:"Cormorant Garamond",serif!important;text-transform:none!important;font-weight:500!important;letter-spacing:.02em!important}
 
+/* Header menu: Logo · Bộ sưu tập mới · Mô bedding kể chuyện · Phối giường · Liên hệ */
+.desktop-nav a:nth-child(2),.mobile-menu a:nth-of-type(2){display:none!important}
+.desktop-nav a:first-child,.mobile-menu a:first-of-type{font-size:0!important}
+.desktop-nav a:first-child::after{content:"Bộ sưu tập mới";font-size:18px}
+.mobile-menu a:first-of-type::after{content:"Bộ sưu tập mới";font-size:31px}
+html[lang="en"] .desktop-nav a:first-child::after{content:"New Collection"}
+html[lang="en"] .mobile-menu a:first-of-type::after{content:"New Collection"}
+
 /* Remove redundant intro strip */
 .intro-strip{display:none!important}
 
@@ -69,5 +77,5 @@
 .footer-brand{position:relative;padding-top:132px}
 .footer-brand::before{content:"";position:absolute;left:0;top:0;width:132px;height:122px;background:url('logo.webp') center/contain no-repeat}
 @media(max-width:960px){.story-list-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:42px;height:40px;flex-basis:42px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}.mobile-menu a{font-size:31px!important}.hero-progress{left:5vw;bottom:20px}.hero-progress button{width:24px}.hero-progress button.active{width:36px}.reviews{padding:64px 7vw!important}.reviews blockquote{font-size:clamp(25px,7.4vw,33px)!important;padding:0 2vw}.reviews blockquote span{margin-top:18px!important}.review-dots{margin-top:16px!important}.story-list-grid{grid-template-columns:1fr;gap:34px}.story-list-intro{margin-bottom:30px}.story-list-intro h2{font-size:42px}.story-list-card h3{font-size:26px}}
+@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:42px;height:40px;flex-basis:42px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}.mobile-menu a{font-size:31px!important}.mobile-menu a:first-of-type{font-size:0!important}.mobile-menu a:first-of-type::after{font-size:31px}.hero-progress{left:5vw;bottom:20px}.hero-progress button{width:24px}.hero-progress button.active{width:36px}.reviews{padding:64px 7vw!important}.reviews blockquote{font-size:clamp(25px,7.4vw,33px)!important;padding:0 2vw}.reviews blockquote span{margin-top:18px!important}.review-dots{margin-top:16px!important}.story-list-grid{grid-template-columns:1fr;gap:34px}.story-list-intro{margin-bottom:30px}.story-list-intro h2{font-size:42px}.story-list-card h3{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:opacity .35s ease;transform:none!important}.hero-slide.active{transform:none!important}}
