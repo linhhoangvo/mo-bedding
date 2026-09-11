@@ -62,9 +62,9 @@ main{display:flex;flex-direction:column}
 main>.hero{order:0}
 main>.collections{order:1}
 main>.products{order:2}
-main>.story-split{order:3}
-main>.lifestyle{order:4}
-main>.material{order:5}
+main>.material{order:3}
+main>.story-split{order:4}
+main>.lifestyle{order:5}
 main>.reviews{order:6}
 main>.bundle{order:7}
 main>.community{order:8}
