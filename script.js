@@ -220,7 +220,7 @@ const moStories = [
   {status:'Nháp',title:'“Nhà gọn thích nhỉ”',desc:'Tâm sự của một người bạn trai.',img:'linen.jpg'}
 ];
 
-/* Homepage shows only a few stories. #story expands to the full 27-story catalogue. */
+/* Homepage keeps only the preview. /#story switches the site into a dedicated catalogue view. */
 const storyFeature = document.querySelector('.story-split');
 if (storyFeature) storyFeature.id = 'story-featured';
 
@@ -254,13 +254,33 @@ function renderStoryPreview() {
   storySection.innerHTML = homeStoryMarkup;
 }
 
-function syncStoryRoute({scroll = false} = {}) {
-  if (!storySection) return;
-  if (location.hash === '#story') {
-    renderStoryCatalogue();
-    if (scroll) requestAnimationFrame(() => storySection.scrollIntoView({ block: 'start' }));
+function setStandaloneStoryView(active) {
+  const sections = $$('main > section');
+  if (active) {
+    document.body.classList.add('story-page-view');
+    sections.forEach(section => {
+      section.style.display = section === storySection ? '' : 'none';
+    });
+    storySection?.classList.add('in');
   } else {
+    document.body.classList.remove('story-page-view');
+    sections.forEach(section => { section.style.display = ''; });
+  }
+}
+
+function syncStoryRoute() {
+  if (!storySection) return;
+  const isStoryPage = location.hash === '#story';
+  if (isStoryPage) {
+    renderStoryCatalogue();
+    setStandaloneStoryView(true);
+    requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'auto' }));
+  } else {
+    setStandaloneStoryView(false);
     renderStoryPreview();
+    if (location.hash) {
+      requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView({ block: 'start' }));
+    }
   }
 }
 
@@ -273,5 +293,5 @@ if (storyLeadLink) {
   storyLeadLink.textContent = 'Xem danh sách chuyện →';
 }
 
-syncStoryRoute({scroll: location.hash === '#story'});
-window.addEventListener('hashchange', () => syncStoryRoute({scroll: location.hash === '#story'}));
+syncStoryRoute();
+window.addEventListener('hashchange', syncStoryRoute);
