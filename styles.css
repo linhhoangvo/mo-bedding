@@ -244,3 +244,70 @@ html[lang="en"] .collections .section-heading .line-link::before{content:"ALL CO
   .footer-brand p{font-size:18px!important}
 }
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:opacity .35s ease;transform:none!important}.hero-slide.active{transform:none!important}}
+
+/* Cinematic collection film — Parachute-style full-width mood moment */
+.collections{position:relative!important;overflow:hidden!important}
+.collections::after{
+  content:"";
+  display:block;
+  height:clamp(500px,62vw,760px);
+  margin:76px -5vw -110px;
+  background:
+    linear-gradient(90deg,rgba(16,17,15,.48) 0%,rgba(16,17,15,.12) 48%,rgba(16,17,15,.20) 100%),
+    url('hero-photo.jpg') center/cover no-repeat;
+  animation:moCollectionFilm 24s steps(1,end) infinite,moCollectionDrift 6s ease-in-out infinite alternate;
+  transform-origin:center;
+}
+.collections .collection-grid::before{
+  content:"Đổi mood. Đổi cả căn phòng.";
+  position:absolute;
+  left:5vw;
+  bottom:104px;
+  z-index:5;
+  max-width:640px;
+  color:#fff;
+  font:500 clamp(36px,4vw,58px)/.98 "Cormorant Garamond",serif;
+  letter-spacing:-.02em;
+  text-shadow:0 2px 18px rgba(0,0,0,.28);
+  pointer-events:none;
+}
+.collections .collection-grid::after{
+  content:"Một lớp màu mới, một cảm giác mới.  ·  KHÁM PHÁ MÔ →";
+  position:absolute;
+  left:5vw;
+  bottom:58px;
+  z-index:5;
+  color:rgba(255,255,255,.92);
+  font:500 11px/1.4 Manrope,sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-shadow:0 2px 14px rgba(0,0,0,.28);
+  pointer-events:none;
+}
+@keyframes moCollectionFilm{
+  0%,16.5%{background-image:linear-gradient(90deg,rgba(16,17,15,.48),rgba(16,17,15,.12) 48%,rgba(16,17,15,.20)),url('hero-photo.jpg')}
+  16.6%,33.2%{background-image:linear-gradient(90deg,rgba(16,17,15,.48),rgba(16,17,15,.12) 48%,rgba(16,17,15,.20)),url('linen.jpg')}
+  33.3%,49.9%{background-image:linear-gradient(90deg,rgba(16,17,15,.48),rgba(16,17,15,.12) 48%,rgba(16,17,15,.20)),url('window.jpg')}
+  50%,66.5%{background-image:linear-gradient(90deg,rgba(16,17,15,.48),rgba(16,17,15,.12) 48%,rgba(16,17,15,.20)),url('pillows.jpg')}
+  66.6%,83.2%{background-image:linear-gradient(90deg,rgba(16,17,15,.48),rgba(16,17,15,.12) 48%,rgba(16,17,15,.20)),url('rumple.jpg')}
+  83.3%,100%{background-image:linear-gradient(90deg,rgba(16,17,15,.48),rgba(16,17,15,.12) 48%,rgba(16,17,15,.20)),url('green.jpg')}
+}
+@keyframes moCollectionDrift{
+  from{background-size:auto,104%;background-position:center,50% 50%}
+  to{background-size:auto,111%;background-position:center,52% 47%}
+}
+html[lang="en"] .collections .collection-grid::before{content:"Change the mood. Change the whole room."}
+html[lang="en"] .collections .collection-grid::after{content:"New color, new feeling.  ·  DISCOVER MÔ →"}
+@media(max-width:960px){
+  .collections::after{height:600px;margin-top:58px}
+  .collections .collection-grid::before{bottom:92px;font-size:46px}
+  .collections .collection-grid::after{bottom:48px}
+}
+@media(max-width:620px){
+  .collections::after{height:58vh;min-height:440px;margin:52px -5vw -72px}
+  .collections .collection-grid::before{left:7vw;right:7vw;bottom:86px;font-size:38px;max-width:86vw}
+  .collections .collection-grid::after{left:7vw;right:7vw;bottom:42px;font-size:9px;line-height:1.5}
+}
+@media(prefers-reduced-motion:reduce){
+  .collections::after{animation:none;background-size:cover;background-position:center}
+}
