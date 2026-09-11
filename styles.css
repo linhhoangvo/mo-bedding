@@ -12,6 +12,9 @@
 .header-actions .text-btn,.header-actions .cart-btn{font-family:"Cormorant Garamond",serif!important;font-size:17px!important;font-weight:500!important;letter-spacing:.025em!important;text-transform:none!important}
 .mobile-menu a{font-family:"Cormorant Garamond",serif!important;text-transform:none!important;font-weight:500!important;letter-spacing:.02em!important}
 
+/* Remove redundant intro strip */
+.intro-strip{display:none!important}
+
 /* Cinematic hero — photo sequence that feels like a short film */
 .hero-slides{position:absolute;inset:0;overflow:hidden;background:#d8d3ca}
 .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.025);transition:opacity 1.45s ease,transform 5.4s cubic-bezier(.2,.55,.3,1);will-change:opacity,transform}
