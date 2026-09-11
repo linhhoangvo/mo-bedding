@@ -90,7 +90,7 @@ main>.journal{order:9}
 .collections .card-label span:first-child::before{display:block;font:500 34px/1 "Cormorant Garamond",serif;letter-spacing:-.015em}
 .collections .card-label span:first-child::after{display:block;margin-top:10px;max-width:330px;font:400 11px/1.55 Manrope,sans-serif;letter-spacing:0;color:rgba(255,255,255,.84)}
 .collections .card-label span:last-child::before{display:block;font:600 9px/1 Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.88)}
-.collections .collection-card:nth-child(1) .card-label span:first-child::before{content:"Ru Tình"}
+.collections .collection-card:nth-child(1) .card-label span:first-child::before{content:"Human Love Letter"}
 .collections .collection-card:nth-child(1) .card-label span:first-child::after{content:"Nét vẽ tay mềm như lời ru, trên nền hồng đất và kem."}
 .collections .collection-card:nth-child(1) .card-label span:last-child::before{content:"BỘ SƯU TẬP 03 · MỚI"}
 .collections .collection-card:nth-child(2) .card-label span:first-child::before{content:"Nhã"}
