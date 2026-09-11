@@ -18,10 +18,12 @@
 /* Remove hero CTA button */
 .hero-copy .btn{display:none!important}
 
-/* Keep product-section title elegant and on one line on desktop */
+/* Keep key section titles elegant and on one line on desktop */
 @media(min-width:961px){
-  .products .section-heading>div{min-width:0;flex:1}
+  .products .section-heading>div,
+  .collections .section-heading>div{min-width:0;flex:1}
   .products .section-heading h2{max-width:none!important;white-space:nowrap;font-size:clamp(38px,3.55vw,58px)!important;letter-spacing:-.02em}
+  .collections .section-heading h2{max-width:none!important;white-space:nowrap;font-size:clamp(36px,3.35vw,54px)!important;letter-spacing:-.02em}
 }
 
 /* Smaller story quote */
