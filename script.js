@@ -47,3 +47,51 @@ $('#langBtn')?.addEventListener('click',()=>{lang=lang==='vi'?'en':'vi';document
 
 $('#searchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.trim();if(q) alert(`Demo search: “${q}”`);}});
 renderCart();
+
+/* Hero photo-film: multiple stills with crossfade + slow camera movement */
+const heroEl=document.querySelector('.hero');
+if(heroEl){
+  const heroFrames=[
+    ['hero-photo.jpg','Mô bedding in soft natural light','50% 52%'],
+    ['corner.jpg','A quiet bedroom corner','50% 54%'],
+    ['linen.jpg','Soft layered bedding','50% 48%'],
+    ['window.jpg','Morning light by the bed','50% 50%'],
+    ['rumple.jpg','Relaxed bedding texture','50% 55%']
+  ];
+  const originalHero=heroEl.querySelector('.hero-image');
+  const stage=document.createElement('div');
+  stage.className='hero-slides';
+  heroFrames.forEach(([src,alt,pos],i)=>{
+    const img=document.createElement('img');
+    img.src=src; img.alt=alt; img.className='hero-slide'+(i===0?' active':'');
+    img.style.objectPosition=pos;
+    img.decoding='async';
+    if(i===0) img.fetchPriority='high';
+    stage.appendChild(img);
+  });
+  originalHero?.replaceWith(stage);
+
+  const progress=document.createElement('div');
+  progress.className='hero-progress';
+  progress.setAttribute('aria-label','Hero slides');
+  heroFrames.forEach((_,i)=>{
+    const button=document.createElement('button');
+    button.type='button'; button.className=i===0?'active':'';
+    button.setAttribute('aria-label',`Slide ${i+1}`);
+    progress.appendChild(button);
+  });
+  heroEl.appendChild(progress);
+
+  const heroSlides=[...stage.querySelectorAll('.hero-slide')];
+  const heroDots=[...progress.querySelectorAll('button')];
+  let heroIndex=0;
+  const showHero=n=>{
+    heroIndex=(n+heroSlides.length)%heroSlides.length;
+    heroSlides.forEach((img,i)=>img.classList.toggle('active',i===heroIndex));
+    heroDots.forEach((dot,i)=>dot.classList.toggle('active',i===heroIndex));
+  };
+  heroDots.forEach((dot,i)=>dot.addEventListener('click',()=>showHero(i)));
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(()=>showHero(heroIndex+1),4800);
+  }
+}
