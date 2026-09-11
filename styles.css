@@ -1,10 +1,10 @@
 @import url('./styles-base.css');
 
 /* MÔ brand lockup */
-.brand{align-items:center!important;gap:12px!important}
-.brand::before{content:"";display:block;width:64px;height:58px;flex:0 0 64px;background:url('logo.webp') center/contain no-repeat}
+.brand{align-items:center!important;gap:8px!important}
+.brand::before{content:"";display:block;width:52px;height:52px;flex:0 0 52px;background:url('logo-mark.png') left center/contain no-repeat}
 .brand-main,.brand-sub{display:none!important}
-.brand::after{content:"ga gối cho riêng bạn";font:italic 500 17px/1.1 "Cormorant Garamond",serif;color:#5c554d;white-space:nowrap;letter-spacing:.01em}
+.brand::after{content:"ga gối cho riêng bạn";font:italic 500 15px/1.1 "Cormorant Garamond",serif;color:#5c554d;white-space:nowrap;letter-spacing:.01em}
 .footer-brand{position:relative;padding-top:132px}
 .footer-brand::before{content:"";position:absolute;left:0;top:0;width:132px;height:122px;background:url('logo.webp') center/contain no-repeat}
-@media(max-width:620px){.brand{gap:7px!important}.brand::before{width:46px;height:42px;flex-basis:46px}.brand::after{font-size:13px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}}
+@media(max-width:620px){.brand{gap:6px!important}.brand::before{width:40px;height:40px;flex-basis:40px}.brand::after{font-size:12px}.footer-brand{padding-top:104px}.footer-brand::before{width:108px;height:98px}}
