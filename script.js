@@ -100,6 +100,11 @@ const translations = {
   bundleSet:['Đặt trải nghiệm','Experience'],
   bundleCta:['Đặt trải nghiệm','Book the experience'],
   communityTitle:['Theo dõi Mô trên Instagram','Follow Mô on Instagram'],
+  journalTitle:['Đọc một chuyện trước khi ngủ','A story before sleep'],
+  allStories:['Xem tất cả 27 chuyện →','See all 27 stories →'],
+  j1:['Ngày mới vui','A Happy New Day'],
+  j2:['Vitamin B1','Vitamin B1'],
+  j3:['Feeling sexy','Feeling sexy'],
   footerTag:['ga gối cho riêng bạn','bedding made just for you'],
   newsTitle:['Có một câu chuyện muốn kể với Mô?','Have a story to tell Mô?']
 };
@@ -215,13 +220,16 @@ const moStories = [
   {status:'Nháp',title:'“Nhà gọn thích nhỉ”',desc:'Tâm sự của một người bạn trai.',img:'linen.jpg'}
 ];
 
-/* Reserve #story for the complete 27-story catalogue. */
+/* Homepage shows only a few stories. #story expands to the full 27-story catalogue. */
 const storyFeature = document.querySelector('.story-split');
 if (storyFeature) storyFeature.id = 'story-featured';
 
 const storySection = document.querySelector('.journal');
-if (storySection) {
-  storySection.id = 'story';
+const homeStoryMarkup = storySection?.innerHTML || '';
+if (storySection) storySection.id = 'story';
+
+function renderStoryCatalogue() {
+  if (!storySection) return;
   storySection.classList.add('story-list-section');
   storySection.innerHTML = `
     <div class="story-list-intro">
@@ -240,6 +248,22 @@ if (storySection) {
     </div>`;
 }
 
+function renderStoryPreview() {
+  if (!storySection) return;
+  storySection.classList.remove('story-list-section');
+  storySection.innerHTML = homeStoryMarkup;
+}
+
+function syncStoryRoute({scroll = false} = {}) {
+  if (!storySection) return;
+  if (location.hash === '#story') {
+    renderStoryCatalogue();
+    if (scroll) requestAnimationFrame(() => storySection.scrollIntoView({ block: 'start' }));
+  } else {
+    renderStoryPreview();
+  }
+}
+
 const storyLeadLink = document.querySelector('.story-copy .line-link');
 if (storyLeadLink) {
   storyLeadLink.href = '#story';
@@ -249,7 +273,5 @@ if (storyLeadLink) {
   storyLeadLink.textContent = 'Xem danh sách chuyện →';
 }
 
-/* When opening the direct /#story URL, land on the 27-story catalogue after JS assigns the id. */
-if (location.hash === '#story' && storySection) {
-  requestAnimationFrame(() => storySection.scrollIntoView({ block: 'start' }));
-}
+syncStoryRoute({scroll: location.hash === '#story'});
+window.addEventListener('hashchange', () => syncStoryRoute({scroll: location.hash === '#story'}));
